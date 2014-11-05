@@ -1,5 +1,4 @@
-#Note: requires bleeding edge h2o (Nov 4, 2014 or later)
-library("h2o")  
+library("h2o")  #Note: requires bleeding edge h2o (Nov 4, 2014 or later)
 localH2O <- h2o.init(ip = "localhost", port = 54321, startH2O = TRUE)
 
 whiskey <- new("H2OParsedData", h2o.importFile(localH2O, "/Users/oletas01/Documents/whiskey_main.csv"))
@@ -12,6 +11,7 @@ summary(whiskey.pca)
 
 predict.pca <- h2o.predict( object = whiskey.pca, newdata = whiskey, num_pc = 7)
 print(predict.pca)
+
 
 
 resultsPCA <- as.data.frame.H2OParsedData(predict.pca)
@@ -48,14 +48,14 @@ print(predict.k)
 resultsPCA_kMeans <- as.data.frame.H2OParsedData(predict.k)
 resultsPCA_kMeans$Distillery <- as.data.frame.H2OParsedData(whiskey)[,1]
 
-resultsPCA_kMeans[resultsPCA_kMeans$predict==0,]
-resultsPCA_kMeans[resultsPCA_kMeans$predict==1,]
-resultsPCA_kMeans[resultsPCA_kMeans$predict==2,]
-resultsPCA_kMeans[resultsPCA_kMeans$predict==3,]
-resultsPCA_kMeans[resultsPCA_kMeans$predict==4,]
-resultsPCA_kMeans[resultsPCA_kMeans$predict==5,]
-resultsPCA_kMeans[resultsPCA_kMeans$predict==6,]
-resultsPCA_kMeans[resultsPCA_kMeans$predict==7,]
-resultsPCA_kMeans[resultsPCA_kMeans$predict==8,]
-resultsPCA_kMeans[resultsPCA_kMeans$predict==9,]
-resultsPCA_kMeans[resultsPCA_kMeans$predict==10,]
+as.character(resultsPCA_kMeans[resultsPCA_kMeans$predict==0,2])
+as.character(resultsPCA_kMeans[resultsPCA_kMeans$predict==1,2])
+as.character(resultsPCA_kMeans[resultsPCA_kMeans$predict==2,2])
+as.character(resultsPCA_kMeans[resultsPCA_kMeans$predict==3,2])
+as.character(resultsPCA_kMeans[resultsPCA_kMeans$predict==4,2])
+as.character(resultsPCA_kMeans[resultsPCA_kMeans$predict==5,2])
+as.character(resultsPCA_kMeans[resultsPCA_kMeans$predict==6,2])
+as.character(resultsPCA_kMeans[resultsPCA_kMeans$predict==7,2])
+as.character(resultsPCA_kMeans[resultsPCA_kMeans$predict==8,2])
+as.character(resultsPCA_kMeans[resultsPCA_kMeans$predict==9,2])
+as.character(resultsPCA_kMeans[resultsPCA_kMeans$predict==10,2])
