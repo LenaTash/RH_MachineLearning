@@ -7,7 +7,7 @@ java -Xmx1g -jar h2o.jar
 
 1. Upload data
 In the top row toolbar, navigate to Data / Upload.
-Select whiskey data csv provided in this repository.
+Select whiskey_data.csv provided in this repository.
 Click Upload.
 On following page, click Submit.
 When Inspect page loads, check that the dataset has 13 columns and 86 rows.
