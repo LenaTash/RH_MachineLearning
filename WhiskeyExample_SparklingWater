@@ -29,33 +29,16 @@ case class Whiskey( val Distillery   : Option[String],
                     val Nutty        : Option[Int],
                     val Malty        : Option[Int],
                     val Fruity       : Option[Int],
-                    val Floral       : Option[Int]) extends Product {
+                    val Floral       : Option[Int])
 
-  override def canEqual(that: Any):Boolean = that.isInstanceOf[Whiskey]
-  override def productArity: Int = 13
-  override def productElement(n: Int) = n match {
-    case  0 => Distillery
-    case  1 => Body
-    case  2 => Sweetness
-    case  3 => Smoky
-    case  4 => Medicinal
-    case  5 => Tobacco
-    case  6 => Honey
-    case  7 => Spicy
-    case  8 => Winey
-    case  9 => Nutty
-    case 10 => Malty
-    case 11 => Fruity
-    case 12 => Floral
-    case  _ => throw new IndexOutOfBoundsException(n.toString)
-  }
-  override def toString:String = {
-    val sb = new StringBuffer
-    for( i <- 0 until productArity )
-      sb.append(productElement(i)).append(',')
-    sb.toString
-  }
-}
+import java.io.File
+val whiskeyBDataFile = "/Users/oletas01/Documents/whiskey_main.csv"
+val whiskeyBData = new DataFrame(new File(whiskeyBDataFile))
+
+val whiskeyBTable : RDD[Whiskey] = toRDD[Whiskey](whiskeyBData)
+
+
+                    
 
 object WhiskeyParse extends Serializable {
   import org.apache.spark.examples.h2o.SchemaUtils._
@@ -78,21 +61,14 @@ object WhiskeyParse extends Serializable {
       int (row(12)))  // Floral
   }
 }
-
-
-
 val whiskeyDataFile = "/Users/oletas01/Documents/whiskey_main.csv"
 val whiskeyRawData = sc.textFile(whiskeyDataFile,3).cache()
 val whiskeyTable = whiskeyRawData.map(_.split(","))
 
 
 
-import java.io.File
-val whiskeyBDataFile = "/Users/oletas01/Documents/whiskey_main.csv"
-val whiskeyBData = new DataFrame(new File(whiskeyBDataFile))
 
-val whiskeyBTable : RDD[Whiskey] = toRDD[Whiskey](whiskeyBData.map(_.split(",")))
-val whiskeyBTable : RDD[Whiskey] = toRDD[Whiskey](whiskeyBData)
+
 
 
 ****************** NOT FINISHED !!!!!!!!! *******************
